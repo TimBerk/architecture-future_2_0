@@ -1,0 +1,420 @@
+specification {
+
+  color ext_gray #6c6477
+  color ext_primary #1060b0
+  color ext_secondary #23A2D9
+
+  color ext_white #fff
+
+  element person {
+      style {
+          color ext_primary
+          shape person
+      }
+  }
+  element ext_person {
+      style {
+          color ext_gray
+          shape person
+      }
+  }
+
+  element company {
+      style {
+          opacity 10%
+          border dashed
+      }
+  }
+
+  element system {
+      style {
+          color ext_primary
+      }
+  }
+  element ext_system {
+      style {
+          color ext_gray
+      }
+  }
+
+  element service {
+      style {
+          color ext_primary
+      }
+  }
+
+  element database {
+      style {
+          shape cylinder
+          color ext_secondary
+      }
+  }
+
+  element object_storage {
+      style {
+          icon bootstrap:files
+          shape cylinder
+          color ext_secondary
+      }
+  }
+
+  element container
+
+  tag legacy
+  tag integration
+  tag core
+  tag cloud
+
+  tag phase1
+  tag phase2
+  tag phase3
+}
+
+model {
+  operator = person "Оператор" "Работает в клинике, ставит диагнозы, назначает лечение"
+  biz_analyst = person "Бизнес-аналитик" "Сотрудник головного офиса, строит отчеты по KPI"
+  fin_analyst = person "Финансовый аналитик" "Сотрудник финтех-подразделения, анализирует риски"
+  doctor = person "Врач" "Использует ИИ-сервисы для диагностики"
+
+  // === ВНЕШНИЕ СИСТЕМЫ ===
+  med_data_src = ext_system "Медицинские данные, снимки" {
+    description "Внешние источники медицинских данных и исследований"
+  }
+
+  fin_data_src = ext_system "Финансовые данные" {
+    description "Внешние источники финансовой информации"
+  }
+
+  regulators = ext_system "Регуляторы (ФНС, ФОМС, ЦБ)" {
+    description "Государственные органы для отправки отчетности"
+  }
+
+  partners = ext_system "Партнеры (Фарма/Электроника)" {
+    description "Поставщики данных и оборудования"
+  }
+
+  gosuslugi = ext_system "Госуслуги" {
+    description "Портал государственных услуг для идентификации"
+  }
+
+  future = company "Будущее 2.0" {
+    client_interface = system "Клиентский интерфейс оператора" {
+      #legacy
+      description "Фронтальная система для работы операторов (PowerBuilder)"
+    }
+
+    internal_system = system "Внутренняя система" {
+      description "Внутренние сервисы управления клиниками и финансами"
+    }
+
+    dwh = database "DWH" {
+      #legacy, #core
+      description "Хранилище данных на SQL Server 2008"
+    }
+
+    esb = system "Сервисная шина предприятия (ESB)" {
+      #legacy, #integration
+      description "Интеграционная шина на базе Apache Camel"
+    }
+
+    internal_services = system "Внутренние сервисы" {
+      description "Внутренние финансовые данные, управление клиниками и т.д."
+    }
+
+    ai_services = system "ИИ-сервисы" {
+      description "Сервисы на Python для работы с медицинскими данными"
+    }
+
+    // === НОВЫЕ СИСТЕМЫ - ЭТАП 1 (0-6 месяцев) ===
+    event_platform = system "Событийная платформа" {
+      #phase1
+      description "Kafka, Schema Registry, DLQ для пилотных доменов"
+      icon tech:kafka
+    }
+
+    patient_flow_domain = system "Домен 'Пациентский поток'" {
+      #phase1
+      description "Пилотный домен для отслеживания движения пациентов"
+    }
+
+    fin_calc_domain = system "Домен 'Финансовые расчеты'" {
+      #phase1
+      description "Пилотный домен для финансовых операций"
+    }
+
+    // === НОВЫЕ СИСТЕМЫ - ЭТАП 2 (6-18 месяцев) ===
+    // Домены
+    emr_domain = system "EMR Domain" {
+      #phase2
+      description "Домен электронных медицинских записей (мигрированный)"
+    }
+
+    fintech_domain = system "Fintech Domain" {
+      #phase2
+      description "Домен банковских и платежных сервисов"
+    }
+
+    hr_inventory_domain = system "HR & Inventory Domain" {
+      #phase2
+      description "Домен управления персоналом и инвентарем"
+    }
+
+    ai_services_new = system "AI Services Domain" {
+      #phase2
+      description "Новые ИИ-сервисы на Python с доступом к Data Lake"
+      icon tech:python
+    }
+
+    // Аналитическая платформа
+    data_lake = object_storage "Data Lakehouse" {
+      #phase2, #cloud
+      description "Озеро данных на S3 с Apache Iceberg"
+    }
+
+    stream_processor = system "Stream Processor" {
+      #phase2, #cloud
+      description "Apache Flink для near-real-time обработки"
+      // tags "streaming", "flink", "phase2", "new"
+      icon tech:apache-flink
+    }
+
+    starrocks = system "Acceleration Layer (StarRocks)" {
+      #phase2
+      description "Витрина данных для быстрых запросов"
+    }
+
+    self_service_portal = system "Портал самообслуживания" {
+      #phase2
+      description "Интерфейс для конструирования отчетов"
+    }
+
+    data_catalog = system "Data Catalog & Governance" {
+      #phase2
+      description "Управление данными и доступом (Datahub)"
+    }
+
+    // Интеграционные слои
+    anti_corruption_layer = system "Anti-Corruption Layer" {
+      #phase2, #integration
+      description "Мост совместимости для интеграции с Legacy"
+    }
+
+    // === НОВЫЕ СИСТЕМЫ - ЭТАП 3 (18-36 месяцев) ===
+    new_partner_domain_1 = system "Фармацевтический домен" {
+      #phase3
+      description "Интегрированный домен фармацевтической компании"
+    }
+
+    new_partner_domain_2 = system "Домен производителя электроники" {
+      #phase3
+      description "Интегрированный домен производителя медоборудования"
+    }
+
+    geo_region_1 = system "Региональный домен (регион А)" {
+      #phase3
+      description "Обособленный домен для нового региона с локальными требованиями"
+    }
+
+    geo_region_2 = system "Региональный домен (регион Б)" {
+      #phase3
+      description "Обособленный домен для нового региона с локальными требованиями"
+    }
+
+    cdp = system "Customer Data Platform" {
+      #phase3
+      description "Единая платформа данных о клиентах (360° view)"
+    }
+
+    ml_platform = system "ML Platform" {
+      #phase3
+      description "Платформа для монетизации ИИ-функций"
+    }
+  }
+
+  // AsIs связи
+  operator -> client_interface "Работает через интерфейс"
+  med_data_src -> dwh "Поставка медицинских данных и снимков"
+  fin_data_src -> dwh "Поставка финансовых данных"
+  client_interface -> dwh "Запрос/запись данных операторами"
+  client_interface -> internal_system "Вызов бизнес-логики"
+  internal_system -> dwh "Чтение/запись данных"
+  internal_system -> esb "Отправка команд через шину"
+  dwh -> esb "Публикация изменений данных"
+  esb -> internal_services "Маршрутизация запросов"
+  esb -> ai_services "Передача медицинских данных для анализа"
+  internal_services -> dwh "Обратная запись результатов"
+  ai_services -> dwh "Сохранение результатов ИИ-обработки"
+  ai_services -> med_data_src "Запрос дополнительных данных (опционально)"
+
+  // === СВЯЗИ ЭТАПА 1 ===
+  patient_flow_domain -> event_platform "Публикует события о приемах"
+  fin_calc_domain -> event_platform "Публикует события о транзакциях"
+  event_platform -> dwh "Дублирование данных для обратной совместимости"
+
+  // === СВЯЗИ ЭТАПА 2 ===
+  // Миграция доменов
+  emr_domain -> event_platform "Публикует события (ExamCompleted, DiagnosisAdded)"
+  fintech_domain -> event_platform "Публикует события (PaymentReceived, LoanIssued)"
+  hr_inventory_domain -> event_platform "Публикует события (EquipmentStatus, Hiring)"
+
+  // Потоковая обработка
+  event_platform -> stream_processor "Подписка на топики для агрегации"
+  stream_processor -> starrocks "Запись потоковых витрин"
+
+  // Хранение в Data Lake
+  event_platform -> data_lake "Сырая загрузка через Kafka Connect S3"
+
+  // Портал самообслуживания
+  starrocks -> self_service_portal "Выполнение аналитических запросов"
+  data_lake -> self_service_portal "Запросы через Athena/Presto"
+  data_catalog -> data_lake "Сканирование и тегирование"
+
+  // Новые ИИ-сервисы
+  data_lake -> ai_services_new "Чтение данных для обучения моделей"
+  ai_services_new -> event_platform "Публикация предсказаний"
+  ai_services_new -> emr_domain "API вызов для обогащения карт"
+
+  // Интеграция с внешним миром
+  data_lake -> regulators "Формирование отчетности"
+  partners -> event_platform "Интеграция данных партнеров"
+  gosuslugi -> fintech_domain "Верификация клиентов"
+
+  // Антикоррупционный слой (мосты с Legacy)
+  dwh -> anti_corruption_layer "CDC (Debezium) из SQL Server"
+  anti_corruption_layer -> event_platform "Трансляция в события"
+  event_platform -> anti_corruption_layer "Обратная запись в Legacy"
+  anti_corruption_layer -> dwh "Запись в старые таблицы"
+
+  // Связи с пользователями
+  biz_analyst -> self_service_portal "Строит отчеты по KPI"
+  fin_analyst -> starrocks "Анализирует кредитные риски"
+  doctor -> ai_services_new "Использует ИИ-помощника"
+
+  // === СВЯЗИ ЭТАПА 3 ===
+  // Новые партнерские домены
+  new_partner_domain_1 -> event_platform "Интеграция через события"
+  new_partner_domain_2 -> event_platform "Интеграция через события"
+
+  // Региональная экспансия
+  geo_region_1 -> event_platform "События с учетом локальных требований"
+  geo_region_2 -> event_platform "События с учетом локальных требований"
+
+  // CDP и монетизация
+  event_platform -> cdp "Сбор событий для 360-профиля"
+  cdp -> ml_platform "Обогащенные данные для монетизации"
+  ml_platform -> new_partner_domain_1 "Продажа ИИ-функций"
+  ml_platform -> new_partner_domain_2 "Продажа ИИ-функций"
+}
+
+views {
+
+  view asis {
+    title "AsIs"
+
+    include operator, med_data_src, fin_data_src, ai_services, future.**
+    exclude element.tag = #phase1, element.tag =#phase2, element.tag =#phase3
+
+    style element.tag = #legacy {
+      color red
+    }
+  }
+
+    // === ВИД ЭТАПА 1 ===
+  view Phase1 {
+    title "Этап 1 (0-6 месяцев)"
+
+    include partners, med_data_src, fin_data_src, patient_flow_domain, event_platform, fin_calc_domain, dwh, element.tag = #phase1
+
+    exclude element.tag = #phase2, element.tag =#phase3
+
+    style element.tag = #phase1 {
+      color green
+    }
+
+    autoLayout TopBottom
+  }
+
+  // === ВИД ЭТАПА 2 ===
+  view Phase2 {
+    title "Этап 2 (6-18 месяцев)"
+
+    include
+      biz_analyst,
+      fin_analyst,
+      doctor,
+      regulators,
+      gosuslugi,
+      emr_domain,
+      fintech_domain,
+      event_platform,
+      hr_inventory_domain,
+      ai_services_new,
+      data_lake,
+      stream_processor,
+      starrocks,
+      self_service_portal,
+      data_catalog,
+      anti_corruption_layer,
+      dwh
+
+    exclude element.tag =#phase3
+
+    style element.tag = #phase2 {
+      color green
+    }
+
+    autoLayout TopBottom
+  }
+
+  // === ВИД ЭТАПА 3 ===
+  view Phase3 {
+    title "Этап 3 (18-36 месяцев)"
+
+    include
+      biz_analyst,
+      fin_analyst,
+      doctor,
+      regulators,
+      partners,
+      gosuslugi,
+      emr_domain,
+      fintech_domain,
+      hr_inventory_domain,
+      ai_services_new,
+      new_partner_domain_1,
+      new_partner_domain_2,
+      geo_region_1,
+      geo_region_2,
+      event_platform,
+      data_lake,
+      stream_processor,
+      starrocks,
+      self_service_portal,
+      cdp,
+      ml_platform
+
+    style element.tag = #phase3 {
+      color green
+    }
+
+    style element.tag = #cloud {
+      icon bootstrap:cloud
+    }
+
+    autoLayout TopBottom
+  }
+
+  view tobe {
+    title "ToBe"
+
+    include *, future.**
+
+    style element.tag = #legacy {
+      color red
+    }
+
+    style element.tag = #cloud {
+      icon bootstrap:cloud
+    }
+  }
+}

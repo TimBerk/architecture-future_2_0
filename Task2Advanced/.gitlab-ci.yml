@@ -1,0 +1,157 @@
+variables:
+  TF_VERSION:        "1.7.5"
+  TF_STATE_BUCKET:   "terraform-state"
+  TF_STATE_KEY:      "future20/vm/terraform.tfstate"
+  MINIO_URL:         "http://minio:9000"
+  ENV:               "dev"
+
+image:
+  name: hashicorp/terraform:${TF_VERSION}
+  entrypoint: [""]
+
+stages:
+  - validate
+  - plan
+  - apply
+  - destroy
+
+# ── Общие переменные окружения для backend ────────────────────────────────
+.backend-env: &backend-env
+  AWS_ACCESS_KEY_ID:     $MINIO_ACCESS_KEY       # GitLab CI Variable (masked)
+  AWS_SECRET_ACCESS_KEY: $MINIO_SECRET_KEY       # GitLab CI Variable (masked)
+  AWS_DEFAULT_REGION:    "us-east-1"
+
+# ── Общий before_script ───────────────────────────────────────────────────
+.tf-before: &tf-before
+  before_script:
+    - export TF_VAR_yc_token="$YC_TOKEN"
+    - export TF_VAR_yc_cloud_id="$YC_CLOUD_ID"
+    - export TF_VAR_yc_folder_id="$YC_FOLDER_ID"
+    - export TF_VAR_subnet_id="$SUBNET_ID"
+    - export TF_VAR_ssh_public_key="$SSH_PUBLIC_KEY"
+    - terraform init
+        -backend-config="endpoint=${MINIO_URL}"
+        -backend-config="bucket=${TF_STATE_BUCKET}"
+        -backend-config="key=${TF_STATE_KEY}"
+        -backend-config="region=us-east-1"
+        -backend-config="skip_credentials_validation=true"
+        -backend-config="skip_metadata_api_check=true"
+        -backend-config="skip_region_validation=true"
+        -backend-config="force_path_style=true"
+
+
+validate:
+  stage: validate
+  variables:
+    <<: *backend-env
+  <<: *tf-before
+  script:
+    - terraform validate
+    - terraform fmt -check -recursive
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH =~ /^(dev|stage|prod)$/
+
+
+plan:
+  stage: plan
+  variables:
+    <<: *backend-env
+  <<: *tf-before
+  script:
+    - terraform plan
+        -var-file="envs/${ENV}.tfvars"
+        -out=tfplan
+        -detailed-exitcode
+  artifacts:
+    name: "tfplan-${ENV}-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - tfplan
+    expire_in: 1 day
+    when: always
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH =~ /^(dev|stage|prod)$/
+
+
+apply:dev:
+  stage: apply
+  variables:
+    <<: *backend-env
+    ENV: "dev"
+  <<: *tf-before
+  script:
+    - terraform apply -auto-approve tfplan
+  dependencies:
+    - plan
+  environment:
+    name: dev
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: on_success
+
+apply:stage:
+  stage: apply
+  variables:
+    <<: *backend-env
+    ENV: "stage"
+  <<: *tf-before
+  script:
+    - terraform apply -auto-approve tfplan
+  dependencies:
+    - plan
+  environment:
+    name: stage
+  rules:
+    - if: $CI_COMMIT_BRANCH == "stage"
+      when: manual
+      allow_failure: false
+
+apply:prod:
+  stage: apply
+  variables:
+    <<: *backend-env
+    ENV: "prod"
+  <<: *tf-before
+  script:
+    - terraform apply -auto-approve tfplan
+  dependencies:
+    - plan
+  environment:
+    name: prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+      allow_failure: false
+
+destroy:dev:
+  stage: destroy
+  variables:
+    <<: *backend-env
+    ENV: "dev"
+  <<: *tf-before
+  script:
+    - terraform destroy -auto-approve -var-file="envs/${ENV}.tfvars"
+  environment:
+    name: dev
+    action: stop
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: manual
+
+destroy:stage:
+  stage: destroy
+  variables:
+    <<: *backend-env
+    ENV: "stage"
+  <<: *tf-before
+  script:
+    - terraform destroy -auto-approve -var-file="envs/${ENV}.tfvars"
+  environment:
+    name: stage
+    action: stop
+  rules:
+    - if: $CI_COMMIT_BRANCH == "stage"
+      when: manual

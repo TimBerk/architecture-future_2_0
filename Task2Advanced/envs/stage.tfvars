@@ -1,0 +1,11 @@
+env_name       = "stage"
+vm_name        = "app-server"
+cores          = 4
+memory         = 8
+disk_size      = 50
+disk_type      = "network-ssd"
+boot_disk_size = 20
+platform_id    = "standard-v3"
+nat            = false
+yc_zone        = "ru-central1-b"
+image_id       = "fd8ue2nph2v23d0rtfug"
