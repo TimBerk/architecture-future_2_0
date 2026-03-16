@@ -1,0 +1,298 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.0">
+  <diagram name="Страница-1" id="9i_KvzH_Pp-ARCTEnSJ-">
+    <mxGraphModel dx="2666" dy="2169" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2500" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="legend-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;" value="&lt;b&gt;ЛЕГЕНДА&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="150" x="50" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-event" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="Событие" vertex="1">
+          <mxGeometry height="30" width="120" x="50" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-command" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Команда" vertex="1">
+          <mxGeometry height="30" width="120" x="50" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-aggregate" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Агрегат" vertex="1">
+          <mxGeometry height="30" width="120" x="50" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен" vertex="1">
+          <mxGeometry height="60" width="140" x="50" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-event-flow" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;" value="Поток события">
+          <mxGeometry x="50" y="270" as="geometry">
+            <mxPoint x="50" y="270" as="sourcePoint" />
+            <mxPoint x="170" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-time" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=12;fontStyle=1;" value="Время →" vertex="1">
+          <mxGeometry height="20" width="100" x="2200" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ПАЦИЕНТ" vertex="1">
+          <mxGeometry height="400" width="300" x="50" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-cmd1" parent="patient-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Администратор регистрирует пациента" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-cmd2" parent="patient-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Пациент обновляет контакты" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-event1" parent="patient-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. PatientRegistered" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-event2" parent="patient-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. PatientVerified" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-event3" parent="patient-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="3. PatientDataUpdated" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-event4" parent="patient-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="4. PatientMerged" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="patient-agg1" parent="patient-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="PatientProfile" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен EMR (Медкарта)" vertex="1">
+          <mxGeometry height="430" width="300" x="400" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-cmd1" parent="emr-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Врач начинает прием" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-cmd2" parent="emr-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Врач завершает прием" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-cmd3" parent="emr-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Врач ставит диагноз" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-cmd4" parent="emr-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Врач выписывает рецепт" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-event1" parent="emr-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. EncounterStarted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-event2" parent="emr-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. EncounterCompleted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-event3" parent="emr-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="3. DiagnosisRecorded" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-event4" parent="emr-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="4. PrescriptionIssued" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="emr-agg1" parent="emr-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Encounter" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ИССЛЕДОВАНИЯ" vertex="1">
+          <mxGeometry height="400" width="300" x="750" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-cmd1" parent="diag-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Лаборант загружает снимки" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-cmd2" parent="diag-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Врач интерпретирует" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-event1" parent="diag-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. StudyUploaded" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-event2" parent="diag-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. AIPredictionAvailable" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-event3" parent="diag-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="3. StudyInterpreted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="diag-agg1" parent="diag-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Study" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ФИНТЕХ" vertex="1">
+          <mxGeometry height="430" width="300" x="1100" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-cmd1" parent="fintech-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Клиент открывает счет" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-cmd2" parent="fintech-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Проходит платеж" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-cmd3" parent="fintech-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Оформление кредита" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-event1" parent="fintech-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. AccountOpened" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-event2" parent="fintech-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. TransactionProcessed" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-event3" parent="fintech-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="3. LoanIssued" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-event4" parent="fintech-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="4. PaymentReceived" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="fintech-agg1" parent="fintech-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Account" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен БИЛЛИНГ" vertex="1">
+          <mxGeometry height="400" width="300" x="1450" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-cmd1" parent="billing-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Выставление счета" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-cmd2" parent="billing-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Отправка требования в страховую" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-event1" parent="billing-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. InvoiceIssued" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-event2" parent="billing-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. InvoicePaid" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-event3" parent="billing-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="3. ClaimSubmitted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="billing-agg1" parent="billing-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Invoice" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ИИ-СЕРВИСЫ" vertex="1">
+          <mxGeometry height="330" width="300" x="1800" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-cmd1" parent="ai-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Запуск модели" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-cmd2" parent="ai-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Развертывание модели" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-event1" parent="ai-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. InferenceCompleted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-event2" parent="ai-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. ModelDeployed" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-agg1" parent="ai-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Model" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ОТЧЕТНОСТЬ" vertex="1">
+          <mxGeometry height="330" width="300" x="2150" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-cmd1" parent="reporting-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b0e0e6;strokeColor=#4682b4;" value="Запрос отчета" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-event1" parent="reporting-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. ReportGenerated" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-event2" parent="reporting-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. DataRefreshCompleted" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-agg1" parent="reporting-domain" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4c1;strokeColor=#e0b83e;" value="Dashboard" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="partner-domain" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;align=center;verticalAlign=top;fillColor=#e0f2f1;strokeColor=#00695c;" value="Домен ПАРТНЕРЫ" vertex="1">
+          <mxGeometry height="280" width="300" x="50" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="partner-event1" parent="partner-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="1. PartnerConnected" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="partner-event2" parent="partner-domain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9c7a0;strokeColor=#d79b6b;" value="2. PartnerDataReceived" vertex="1">
+          <mxGeometry height="30" width="260" x="20" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="PatientRegistered (1)">
+          <mxGeometry x="350" y="430" as="geometry">
+            <mxPoint x="350" y="430" as="sourcePoint" />
+            <mxPoint x="1100" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow2" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="PatientVerified (2)">
+          <mxGeometry x="350" y="520" as="geometry">
+            <mxPoint x="350" y="520" as="sourcePoint" />
+            <mxPoint x="400" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow3" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="EncounterStarted (1)">
+          <mxGeometry x="700" y="430" as="geometry">
+            <mxPoint x="700" y="430" as="sourcePoint" />
+            <mxPoint x="1450" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow4" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="EncounterCompleted (2)">
+          <mxGeometry x="700" y="520" as="geometry">
+            <mxPoint x="700" y="520" as="sourcePoint" />
+            <mxPoint x="1450" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow5" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="DiagnosisRecorded (3)">
+          <mxGeometry x="700" y="610" as="geometry">
+            <mxPoint x="700" y="610" as="sourcePoint" />
+            <mxPoint x="1800" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow6" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="StudyUploaded (1)">
+          <mxGeometry x="1050" y="430" as="geometry">
+            <mxPoint x="1050" y="430" as="sourcePoint" />
+            <mxPoint x="1800" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow7" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="InferenceCompleted (1)">
+          <mxGeometry x="1800" y="480" as="geometry">
+            <mxPoint x="1800" y="480" as="sourcePoint" />
+            <mxPoint x="1050" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow8" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="AIPredictionAvailable (2)">
+          <mxGeometry x="1050" y="520" as="geometry">
+            <mxPoint x="1050" y="520" as="sourcePoint" />
+            <mxPoint x="700" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow9" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="AccountOpened (1)">
+          <mxGeometry x="1400" y="430" as="geometry">
+            <mxPoint x="1400" y="430" as="sourcePoint" />
+            <mxPoint x="1450" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow10" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="PaymentReceived (4)">
+          <mxGeometry x="1400" y="650" as="geometry">
+            <mxPoint x="1400" y="650" as="sourcePoint" />
+            <mxPoint x="1450" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow11" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="InvoiceIssued (1)">
+          <mxGeometry x="1750" y="430" as="geometry">
+            <mxPoint x="1750" y="430" as="sourcePoint" />
+            <mxPoint x="2150" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow12" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="InvoicePaid (2)">
+          <mxGeometry x="1750" y="520" as="geometry">
+            <mxPoint x="1750" y="520" as="sourcePoint" />
+            <mxPoint x="2150" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow13" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="ModelDeployed (2)">
+          <mxGeometry x="2100" y="520" as="geometry">
+            <mxPoint x="2100" y="520" as="sourcePoint" />
+            <mxPoint x="2150" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow14" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;dashPattern=8 4;strokeColor=#000000;fontSize=10;" value="PartnerDataReceived (2)">
+          <mxGeometry x="350" y="900" as="geometry">
+            <mxPoint x="350" y="900" as="sourcePoint" />
+            <mxPoint x="1800" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=20;" value="&lt;h1&gt;Event Storming: Целевая событийная архитектура &#39;Будущее 2.0&#39;&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="40" width="1000" x="800" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="time-axis" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;" value="ХРОНОЛОГИЯ СОБЫТИЙ (ранние события слева, поздние справа)" vertex="1">
+          <mxGeometry height="20" width="1000" x="800" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="time-arrow" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" value="">
+          <mxGeometry x="800" y="320" as="geometry">
+            <mxPoint x="800" y="320" as="sourcePoint" />
+            <mxPoint x="1800" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;" value="Команды (голубые) → События (оранжевые) с номерами 1,2,3... в порядке возникновения → Агрегаты (желтые). Пунктирные линии = потоки событий между доменами." vertex="1">
+          <mxGeometry height="20" width="1000" x="800" y="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

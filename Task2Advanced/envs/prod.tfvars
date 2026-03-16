@@ -1,0 +1,11 @@
+env_name       = "prod"
+vm_name        = "app-server"
+cores          = 8
+memory         = 16
+disk_size      = 200
+disk_type      = "network-ssd-nonreplicated"
+boot_disk_size = 30
+platform_id    = "standard-v3"
+nat            = false
+yc_zone        = "ru-central1-a"
+image_id       = "fd8ue2nph2v23d0rtfug"
